@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "server": "python -m uvicorn server.main:app --reload --port 8000",
+    "admin:dev": "npm run dev --prefix admin",
+    "admin:server": "npm run server --prefix admin",
+    "start": "npx concurrently \"npm run dev\" \"npm run server\" \"npm run admin:dev\" \"npm run admin:server\"",
     "seed": "python scripts/seed_data.py",
     "build": "vite build",
     "preview": "vite preview",
