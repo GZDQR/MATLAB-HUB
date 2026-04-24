@@ -1,7 +1,10 @@
 import ssl
-_default_ctx = ssl.create_default_context()
-_default_ctx.set_ciphers("DEFAULT:@SECLEVEL=1")
-ssl._create_default_https_context = lambda: _default_ctx
+try:
+    _default_ctx = ssl.create_default_context()
+    _default_ctx.set_ciphers("DEFAULT:@SECLEVEL=1")
+    ssl._create_default_https_context = lambda: _default_ctx
+except Exception:
+    pass
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
