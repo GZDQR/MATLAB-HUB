@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Pencil, Trash2, Plus, ArrowLeft, Image as ImageIcon, Save, Loader2, Link, Link2, FileText, Video, ShoppingCart } from 'lucide-react';
+import { Pencil, Trash2, Plus, ArrowLeft, Image as ImageIcon, Save, Loader2, Link2, FileText, Video, ShoppingCart } from 'lucide-react';
 import { fetchModels, deleteModel, saveModel, uploadImage, Model, Resource } from './api/admin-api';
 
 function App() {
