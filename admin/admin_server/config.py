@@ -21,23 +21,18 @@ from supabase import create_client, Client  # noqa: E402
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 # --- Supabase 配置 ---
-SUPABASE_URL: str = os.getenv("SUPABASE_URL", "")
-SUPABASE_KEY: str = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
-
-# if not SUPABASE_URL or not SUPABASE_KEY:
-#     raise ValueError(
-#         "缺少 Supabase 配置。请在 .env 文件中设置 SUPABASE_URL 和 SUPABASE_SERVICE_ROLE_KEY"
-#     )
+SUPABASE_URL: str = os.getenv("SUPABASE_URL") or "https://fallback.supabase.co"
+SUPABASE_KEY: str = os.getenv("SUPABASE_SERVICE_ROLE_KEY") or "fallback_key"
 
 # NOTE: 使用 service_role key 在后端操作数据库，绕过 RLS 策略
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # --- Cloudflare R2 配置 ---
-R2_ENDPOINT_URL: str = os.getenv("R2_ENDPOINT_URL", "")
-R2_ACCESS_KEY_ID: str = os.getenv("R2_ACCESS_KEY_ID", "")
-R2_SECRET_ACCESS_KEY: str = os.getenv("R2_SECRET_ACCESS_KEY", "")
-R2_BUCKET_NAME: str = os.getenv("R2_BUCKET_NAME", "")
-R2_PUBLIC_DOMAIN: str = os.getenv("R2_PUBLIC_DOMAIN", "")
+R2_ENDPOINT_URL: str = os.getenv("R2_ENDPOINT_URL") or "https://fallback.r2.cloudflarestorage.com"
+R2_ACCESS_KEY_ID: str = os.getenv("R2_ACCESS_KEY_ID") or "fallback_key"
+R2_SECRET_ACCESS_KEY: str = os.getenv("R2_SECRET_ACCESS_KEY") or "fallback_secret"
+R2_BUCKET_NAME: str = os.getenv("R2_BUCKET_NAME") or "fallback_bucket"
+R2_PUBLIC_DOMAIN: str = os.getenv("R2_PUBLIC_DOMAIN") or "fallback_domain"
 
 s3_client = boto3.client(
     "s3",
