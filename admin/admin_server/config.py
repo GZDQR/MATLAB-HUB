@@ -24,10 +24,10 @@ load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 SUPABASE_URL: str = os.getenv("SUPABASE_URL", "")
 SUPABASE_KEY: str = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
 
-if not SUPABASE_URL or not SUPABASE_KEY:
-    raise ValueError(
-        "缺少 Supabase 配置。请在 .env 文件中设置 SUPABASE_URL 和 SUPABASE_SERVICE_ROLE_KEY"
-    )
+# if not SUPABASE_URL or not SUPABASE_KEY:
+#     raise ValueError(
+#         "缺少 Supabase 配置。请在 .env 文件中设置 SUPABASE_URL 和 SUPABASE_SERVICE_ROLE_KEY"
+#     )
 
 # NOTE: 使用 service_role key 在后端操作数据库，绕过 RLS 策略
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)

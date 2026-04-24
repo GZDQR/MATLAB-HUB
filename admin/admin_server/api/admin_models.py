@@ -21,11 +21,16 @@ class ModelUpdate(BaseModel):
     version: str
     resources: List[ResourceItem]
 
+from fastapi.responses import JSONResponse
+import traceback
+
 @router.get("/models")
 async def get_all_models():
-    # Admin 端需要获取所有模型进行管理，此处不分页或使用大分页
-    res = supabase.table("models").select("*, resources(*)").order("created_at", desc=False).execute()
-    return res.data
+    try:
+        res = supabase.table("models").select("*, resources(*)").order("created_at", desc=False).execute()
+        return res.data
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"detail": str(e), "trace": traceback.format_exc()})
 
 @router.delete("/models/{model_id}")
 async def delete_model(model_id: str):
