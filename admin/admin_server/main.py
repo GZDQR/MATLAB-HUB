@@ -1,11 +1,6 @@
-import ssl
-try:
-    _default_ctx = ssl.create_default_context()
-    _default_ctx.set_ciphers("DEFAULT:@SECLEVEL=1")
-    ssl._create_default_https_context = lambda: _default_ctx
-except Exception:
-    pass
-
+"""
+Admin 后台 FastAPI 应用入口
+"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from admin_server.api.upload import router as upload_router
